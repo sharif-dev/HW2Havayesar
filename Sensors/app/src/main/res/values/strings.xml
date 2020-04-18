@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Sensors</string>
+    <string name="app_description">You should allow to lock myapp</string>
+
 </resources>
