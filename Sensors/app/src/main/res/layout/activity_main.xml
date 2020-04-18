@@ -2,24 +2,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#16BB95"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp">
 
     <Button
         android:id="@+id/startAlaram"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/set_alaram_time" />
+
     <Button
         android:id="@+id/locking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/go_to_locking_page"/>
+        android:text="@string/go_to_locking_page" />
+
+    <Button
+        android:id="@+id/go_to_shaking_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GO TO SHAKING PAGE" />
+
+    <Switch
+        android:id="@+id/alarm"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:fontFamily="sans-serif-black"
+        android:text="        SET TIME" />
+
+    <SeekBar
+        android:id="@+id/sensivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:max="20"
+        android:progress="5"
+        android:progressBackgroundTint="#CE0909"
+        android:progressTint="#E6DA6F" />
 
     <TextView
-        android:id="@+id/alarmprompt"
-        android:layout_width="fill_parent"
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000" />
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Angular velocity : 5" />
 
 </LinearLayout>

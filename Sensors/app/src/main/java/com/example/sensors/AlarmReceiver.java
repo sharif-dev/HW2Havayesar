@@ -11,7 +11,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 //        Toast.makeText(context, "Alarm received!", Toast.LENGTH_LONG).show();
 
 
-        float need = intent.getFloatExtra("need", 0);
+        int need = intent.getIntExtra("need", 0);
         Intent i = new Intent(context, AlarmActivity.class);
         i.putExtra("need", need);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

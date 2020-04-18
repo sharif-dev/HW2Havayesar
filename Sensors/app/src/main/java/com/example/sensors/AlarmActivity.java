@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 public class AlarmActivity extends Activity {
-    private float x;
+    private int x;
 
     CardView cardView;
 
@@ -28,7 +28,7 @@ public class AlarmActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_activity);
-        x = getIntent().getFloatExtra("need", 0);
+        x = getIntent().getIntExtra("need", 5);
         cardView = findViewById(R.id.cardview);
 
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
@@ -88,7 +88,8 @@ public class AlarmActivity extends Activity {
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                if (event.values[2] > x) {
+                float f = (float) x;
+                if (event.values[2] > f) {
 //                    Toast.makeText(mainActivity, "bye", Toast.LENGTH_SHORT).show();
                     System.out.println(event.values[2]);
                     mediaPlayer.release();

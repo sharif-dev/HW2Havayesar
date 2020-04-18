@@ -30,7 +30,7 @@ public class AlarmService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         calendar = intent.getLongExtra("millis", 0);
-        float need = intent.getFloatExtra("need", 0);
+        int need = intent.getIntExtra("need", 0);
         System.out.println(calendar);;
         System.out.println(need);
         Intent i = new Intent(getBaseContext(), AlarmReceiver.class);
