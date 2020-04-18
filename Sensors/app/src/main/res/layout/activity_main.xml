@@ -9,7 +9,12 @@
         android:id="@+id/startAlaram"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Set Alaram Time" />
+        android:text="@string/set_alaram_time" />
+    <Button
+        android:id="@+id/locking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/go_to_locking_page"/>
 
     <TextView
         android:id="@+id/alarmprompt"
