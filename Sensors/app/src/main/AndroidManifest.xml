@@ -24,6 +24,13 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
             </intent-filter>
         </receiver>
+
+        <service android:name=".AlarmService" />
+
+        <activity android:name=".AlarmActivity" />
+
+        <receiver android:name=".AlarmReceiver" android:process=":remote" />
+
     </application>
 
 </manifest>
