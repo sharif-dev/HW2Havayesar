@@ -10,6 +10,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -18,6 +19,7 @@ public class AlarmActivity extends Activity {
     private int x;
 
     CardView cardView;
+    TextView textView;
 
     @Override
     public void onBackPressed() {
@@ -28,9 +30,10 @@ public class AlarmActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_activity);
-        x = getIntent().getIntExtra("need", 5);
+        x = getIntent().getIntExtra("need", 0);
         cardView = findViewById(R.id.cardview);
-
+        textView = findViewById(R.id.textView2);
+        textView.setText(String.valueOf(x));
         final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.alarm);
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -44,32 +47,32 @@ public class AlarmActivity extends Activity {
             @Override
             public void onTick(long millisUntilFinished) {
                 int time = (int) (millisUntilFinished / 1000);
-//                System.out.println(time);
-//                if (time % 2 == 0){
-//                    cardView.setBackgroundColor(Color.WHITE);
-//                }else {
-//                    cardView.setBackgroundColor(Color.BLACK);
-//                }
-
-                switch (time % 6) {
-                    case 0:
-                        cardView.setBackgroundColor(Color.WHITE);
-                        break;
-                    case 1:
-                        cardView.setBackgroundColor(Color.RED);
-                        break;
-                    case 2:
-                        cardView.setBackgroundColor(Color.BLUE);
-                        break;
-                    case 3:
-                        cardView.setBackgroundColor(Color.GREEN);
-                        break;
-                    case 4:
-                        cardView.setBackgroundColor(Color.YELLOW);
-                        break;
-                    case 5:
-                        cardView.setBackgroundColor(Color.BLACK);
+                System.out.println(time);
+                if (time % 2 == 0){
+                    cardView.setBackgroundColor(Color.WHITE);
+                }else {
+                    cardView.setBackgroundColor(Color.BLACK);
                 }
+
+//                switch (time % 6) {
+//                    case 0:
+//                        cardView.setBackgroundColor(Color.WHITE);
+//                        break;
+//                    case 1:
+//                        cardView.setBackgroundColor(Color.RED);
+//                        break;
+//                    case 2:
+//                        cardView.setBackgroundColor(Color.BLUE);
+//                        break;
+//                    case 3:
+//                        cardView.setBackgroundColor(Color.GREEN);
+//                        break;
+//                    case 4:
+//                        cardView.setBackgroundColor(Color.YELLOW);
+//                        break;
+//                    case 5:
+//                        cardView.setBackgroundColor(Color.BLACK);
+//                }
 
 
             }
@@ -106,7 +109,7 @@ public class AlarmActivity extends Activity {
         sensorManager.registerListener(sensorEventListener, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
 
-        System.out.println(x);
+
 
 
     }

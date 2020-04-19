@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, SensorHandler.class);
 
 
-
         lock = (Button) findViewById(R.id.locking);
         lock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 if (textAlarmPrompt.isChecked() && flag){
                     stopService(intentForService);
+
                     intentForService = new Intent(mainActivity, AlarmService.class);
                     intentForService.putExtra("millis", calendar.getTimeInMillis());
                     intentForService.putExtra("need", seekBar.getProgress());

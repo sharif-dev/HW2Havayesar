@@ -5,13 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 
 public class AlarmReceiver extends BroadcastReceiver {
-
+    int need;
     @Override
     public void onReceive(Context context, Intent intent) {
 //        Toast.makeText(context, "Alarm received!", Toast.LENGTH_LONG).show();
 
 
-        int need = intent.getIntExtra("need", 0);
+        need = intent.getIntExtra("need", 0);
+        System.out.println("receiver " + need);
         Intent i = new Intent(context, AlarmActivity.class);
         i.putExtra("need", need);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
