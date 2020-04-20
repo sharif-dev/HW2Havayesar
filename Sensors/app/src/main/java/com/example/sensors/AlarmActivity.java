@@ -2,6 +2,7 @@ package com.example.sensors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -16,10 +17,15 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 public class AlarmActivity extends Activity {
+
+    SharedPreferences sharedPreferences;
     private int x;
+
+
 
     CardView cardView;
     TextView textView;
+
 
     @Override
     public void onBackPressed() {
@@ -30,7 +36,8 @@ public class AlarmActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_activity);
-        x = getIntent().getIntExtra("need", 0);
+        sharedPreferences = getSharedPreferences("velocity", MODE_PRIVATE);
+        x = sharedPreferences.getInt("v", 3);
         cardView = findViewById(R.id.cardview);
         textView = findViewById(R.id.textView2);
         textView.setText(String.valueOf(x));
@@ -91,8 +98,8 @@ public class AlarmActivity extends Activity {
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                float f = (float) x;
-                if (event.values[2] > f) {
+
+                if (event.values[2] > x) {
 //                    Toast.makeText(mainActivity, "bye", Toast.LENGTH_SHORT).show();
                     System.out.println(event.values[2]);
                     mediaPlayer.release();

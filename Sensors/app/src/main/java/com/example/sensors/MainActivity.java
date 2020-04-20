@@ -2,6 +2,7 @@ package com.example.sensors;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     Calendar calendar;
     boolean flag = false;
     float need;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
 
     final static int RQS_1 = 1;
 
@@ -51,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        sharedPreferences = getSharedPreferences("velocity", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         seekBar = findViewById(R.id.sensivity);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -69,13 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (textAlarmPrompt.isChecked() && flag){
-                    stopService(intentForService);
-
-                    intentForService = new Intent(mainActivity, AlarmService.class);
-                    intentForService.putExtra("millis", calendar.getTimeInMillis());
-                    intentForService.putExtra("need", seekBar.getProgress());
-                    startService(intentForService);
+                if (textAlarmPrompt.isChecked() && flag) {
+                    editor.putInt("v", seekBar.getProgress());
+                    editor.commit();
                 }
             }
         });
@@ -89,13 +92,12 @@ public class MainActivity extends AppCompatActivity {
         textAlarmPrompt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked && flag){
+                if (isChecked && flag) {
                     stopService(intentForService);
                     intentForService = new Intent(mainActivity, AlarmService.class);
                     intentForService.putExtra("millis", calendar.getTimeInMillis());
-                    intentForService.putExtra("need", seekBar.getProgress());
                     startService(intentForService);
-                }else if (!isChecked && flag){
+                } else if (!isChecked && flag) {
                     stopService(intentForService);
                 }
             }
@@ -159,17 +161,16 @@ public class MainActivity extends AppCompatActivity {
         textAlarmPrompt.setText("        " + strings[0] + " : " + strings[1]);
 
 
-        if (flag){
+        if (flag) {
             stopService(intentForService);
         }
         intentForService = new Intent(this, AlarmService.class);
         intentForService.putExtra("millis", targetCal.getTimeInMillis());
-        intentForService.putExtra("need", seekBar.getProgress());
+        editor.putInt("v", seekBar.getProgress());
+        editor.commit();
         textAlarmPrompt.setChecked(true);
         flag = true;
         startService(intentForService);
 
     }
 }
-
-

@@ -3,18 +3,19 @@ package com.example.sensors;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
 public class AlarmService extends Service {
     long calendar;
-    int need;
+
+
+
     Intent intent;
-    BroadcastReceiver broadcastReceiver;
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
 
@@ -32,6 +33,11 @@ public class AlarmService extends Service {
     }
 
     @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
     }
@@ -40,11 +46,8 @@ public class AlarmService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         this.intent = intent;
         calendar = intent.getLongExtra("millis", 0);
-        need = intent.getIntExtra("need", 0);
         System.out.println(calendar);;
-        System.out.println(need);
         Intent i = new Intent(getBaseContext(), AlarmReceiver.class);
-        i.putExtra("need", need);
         pendingIntent = PendingIntent.getBroadcast(
                 getBaseContext(), 1, i, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -55,8 +58,4 @@ public class AlarmService extends Service {
         return START_STICKY;
     }
 
-    public void extras(){
-        calendar = intent.getLongExtra("millis", 0);
-        need = intent.getIntExtra("need", 0);
-    }
 }
