@@ -1,8 +1,12 @@
 package com.example.sensors;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     private Intent intent;
 
+
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+    Intent i;
+
+
     Intent intentForService;
     TimePicker myTimePicker;
     Button buttonstartSetDialog;
@@ -38,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     final static int RQS_1 = 1;
+    static boolean check;
+
+    public static boolean getSwitch() {
+        return check;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +108,15 @@ public class MainActivity extends AppCompatActivity {
         textAlarmPrompt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                check = isChecked;
                 if (isChecked && flag) {
-                    stopService(intentForService);
-                    intentForService = new Intent(mainActivity, AlarmService.class);
-                    intentForService.putExtra("millis", calendar.getTimeInMillis());
-                    startService(intentForService);
+
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                            pendingIntent);
                 } else if (!isChecked && flag) {
-                    stopService(intentForService);
+                    alarmManager.cancel(pendingIntent);
                 }
+
             }
         });
 
@@ -162,15 +179,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (flag) {
-            stopService(intentForService);
+            alarmManager.cancel(pendingIntent);
         }
-        intentForService = new Intent(this, AlarmService.class);
-        intentForService.putExtra("millis", targetCal.getTimeInMillis());
+        i = new Intent(getBaseContext(), AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(
+                getBaseContext(), 1, i, 0);
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+//                pendingIntent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                    pendingIntent);
+        }
         editor.putInt("v", seekBar.getProgress());
         editor.commit();
         textAlarmPrompt.setChecked(true);
         flag = true;
-        startService(intentForService);
+
 
     }
+
+
+
+
 }
