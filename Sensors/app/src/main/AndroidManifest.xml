@@ -32,12 +32,12 @@
         <service android:name=".ShakingService"></service>
         <activity android:name=".ShakingActivity"></activity>
         <activity android:name=".AlarmActivity" />
-        <activity android:name=".Seee" />
+
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" >
-        <intent-filter>
-            <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+            </intent-filter>
         </receiver>
 
         <service
