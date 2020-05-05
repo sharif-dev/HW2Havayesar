@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sensors">
 
+    <uses-permission android:name="ACCEL" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -27,7 +28,11 @@
             </intent-filter>
         </receiver>
 
+
+        <service android:name=".ShakingService"></service>
+        <activity android:name=".ShakingActivity"></activity>
         <activity android:name=".AlarmActivity" />
+        <activity android:name=".Seee" />
 
         <receiver android:name=".AlarmReceiver" android:process=":remote" >
         <intent-filter>
