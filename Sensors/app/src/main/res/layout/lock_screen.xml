@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SeekBar
+        android:paddingTop="50dp"
+        android:id="@+id/degree_setter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:max="180"
+        android:progress="5"
+        android:progressBackgroundTint="#CE0909"
+        android:progressTint="#E6DA6F"
+        tools:ignore="MissingConstraints" />
     <Button
         android:id="@+id/enable_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_degree"
+
         android:layout_margin="20dp"
         android:text="@string/enable"/>
     <Button
@@ -20,6 +33,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/enable_button"
         android:text="@string/disable"/>
-
+    <TextView
+        android:id="@+id/text_degree"
+        app:layout_constraintTop_toBottomOf="@id/degree_setter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="Angular velocity : 5"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
