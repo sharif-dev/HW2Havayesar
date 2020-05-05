@@ -23,6 +23,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     Button lock;
+    Button shake;
 
     TextView textView;
     private Intent intent;
@@ -71,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Intent shakeIntent = new Intent(getBaseContext(), ShakingActivity.class);
+
+        shake = findViewById(R.id.go_to_shaking_page);
+        shake.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(shakeIntent);
+            }
+        });
 
         sharedPreferences = getSharedPreferences("velocity", MODE_PRIVATE);
         editor = sharedPreferences.edit();
