@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SeekBar
+        android:paddingTop="50dp"
+        android:id="@+id/shake_sense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:max="20"
+        android:min="5"
+        android:progress="10"
+        android:progressBackgroundTint="#CE0909"
+        android:progressTint="#E6DA6F"
+        tools:ignore="MissingConstraints" />
+    <Button
+        android:id="@+id/enable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/texxxt"
+
+        android:layout_margin="20dp"
+        android:text="@string/enable"/>
+    <Button
+        android:id="@+id/disable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enable"
+        android:text="@string/disable"/>
+    <TextView
+        android:id="@+id/texxxt"
+        app:layout_constraintTop_toBottomOf="@id/shake_sense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="sensitiveness : 10"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
