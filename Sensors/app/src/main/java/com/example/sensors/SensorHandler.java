@@ -26,7 +26,7 @@ public class SensorHandler extends AppCompatActivity  {
     private Button lock , enable , disable;
 
     private Intent intent1;
-    public static int degree = 20;
+    public static int degree = 200;
     private DevicePolicyManager devicePolicyManager;
     private ComponentName componentName;
     private TextView angularSpeed;

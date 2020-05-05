@@ -48,19 +48,14 @@ public class ServiceLockHandler extends Service implements SensorEventListener {
 
     @Override
     public void onDestroy() {
-        sensorManager.unregisterListener(this);
         super.onDestroy();
     }
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        Log.d("Taaag" , "ssalaaf" + event.values[2]);
-        double sar = event.values[2]*(-9.8)/(Math.sqrt(Math.pow(event.values[0],2)+Math.pow(event.values[1],2)+Math.pow(event.values[2],2)) * 9.8);
-//        if (Math.abs(Math.asin(Math.sqrt(1 - Math.pow(sar , 2))))>Math.acos(SensorHandler.degree)){
-        if (event.values[2] < -8) {
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+        if (180 * sensorEvent.values[2]/(-9.8)>SensorHandler.degree){
 
             if (devicePolicyManager != null) {
-//                boolean active = devicePolicyManager.isAdminActive(componentName);
-//                if (active)
 
                 devicePolicyManager.lockNow();
             } else {
@@ -69,10 +64,8 @@ public class ServiceLockHandler extends Service implements SensorEventListener {
             }
         }
 
-//        if (event.values[2]<-8 && enableFlag ){
-//
-//        }
     }
+    
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
