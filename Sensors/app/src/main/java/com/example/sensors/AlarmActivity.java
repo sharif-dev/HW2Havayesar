@@ -55,31 +55,31 @@ public class AlarmActivity extends Activity {
             public void onTick(long millisUntilFinished) {
                 int time = (int) (millisUntilFinished / 1000);
                 System.out.println(time);
-                if (time % 2 == 0){
-                    cardView.setBackgroundColor(Color.WHITE);
-                }else {
-                    cardView.setBackgroundColor(Color.BLACK);
-                }
-
-//                switch (time % 6) {
-//                    case 0:
-//                        cardView.setBackgroundColor(Color.WHITE);
-//                        break;
-//                    case 1:
-//                        cardView.setBackgroundColor(Color.RED);
-//                        break;
-//                    case 2:
-//                        cardView.setBackgroundColor(Color.BLUE);
-//                        break;
-//                    case 3:
-//                        cardView.setBackgroundColor(Color.GREEN);
-//                        break;
-//                    case 4:
-//                        cardView.setBackgroundColor(Color.YELLOW);
-//                        break;
-//                    case 5:
-//                        cardView.setBackgroundColor(Color.BLACK);
+//                if (time % 2 == 0){
+//                    cardView.setBackgroundColor(Color.WHITE);
+//                }else {
+//                    cardView.setBackgroundColor(Color.BLACK);
 //                }
+
+                switch (time % 6) {
+                    case 0:
+                        cardView.setBackgroundColor(Color.WHITE);
+                        break;
+                    case 1:
+                        cardView.setBackgroundColor(Color.RED);
+                        break;
+                    case 2:
+                        cardView.setBackgroundColor(Color.BLUE);
+                        break;
+                    case 3:
+                        cardView.setBackgroundColor(Color.GREEN);
+                        break;
+                    case 4:
+                        cardView.setBackgroundColor(Color.YELLOW);
+                        break;
+                    case 5:
+                        cardView.setBackgroundColor(Color.BLACK);
+                }
 
 
             }
